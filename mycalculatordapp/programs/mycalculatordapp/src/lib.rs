@@ -38,6 +38,15 @@ pub mod mycalculatordapp {
 }
 
 #[derive(Accounts)]
+pub struct Create<'info> {
+    #[account(init, payer = user, space = 8 + 64 + 64 + 64 + 64)]
+    pub calculator: Account<'info, Calculator>,
+    #[account(mut)]
+    pub user: Signer<'info>,
+    pub system_program: Program<'info, System>,
+}
+
+#[derive(Accounts)]
 pub struct Addition<'info> {
     #[account(mut)]
     pub calculator: Account<'info, Calculator>,
